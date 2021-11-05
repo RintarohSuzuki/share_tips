@@ -2,7 +2,7 @@ import subprocess as sp #1. インポート (略称spはあまり一般的では
 
 def main():
    #2-1: 一番簡単な例 lsを実行
-   sp.run('ls')
+   #sp.run('ls')
 
    #2-2: 引数を持たせる場合
    #sp.run(['ls', 'hoge'])
@@ -13,12 +13,11 @@ def main():
    #ただし、外部からアクセスできるようなサイトのコーディングでは非推奨(コマンドインジェクションの可能性があるため)
 
    #2-4: 標準出力、標準エラー出力を受けたい場合
-   #com = 'ls | wc -l'
-   #proc = sp.run(com, shell=True, stdout = sp.PIPE, stderr = sp.STDOUT)
-   #out = proc.stdout.decode("utf8")
-   #print(out) #この書き方だとエラーもくっついて出てくる
-   #2-1~2-3では勝手に標準出力が出てきたが、2-4では変数で受けないと出力できない
-   #どのコマンドが標準出力、標準エラー出力を勝手に吐き出すかは不明
+   com = 'ls | wc -l'
+   proc = sp.run(com, shell=True, stdout = sp.PIPE, stderr = sp.STDOUT)
+   out = proc.stdout.decode("utf8")
+   print(out) #この書き方だとエラーもくっついて出てくる
+   #この場合もstdout, stderrを指定しないとそのまま標準出力、標準エラー出力で出る
 
    #cf.
    # https://tech.mobilefactory.jp/entry/2018/12/27/150000
